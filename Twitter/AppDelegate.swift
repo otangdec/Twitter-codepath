@@ -2,11 +2,11 @@
 //  AppDelegate.swift
 //  Twitter
 //
-//  Created by Sarn Wattanasri on 2/3/16.
-//  Copyright © 2016 Sarn. All rights reserved.
+
 //
 
 import UIKit
+import BDBOAuth1Manager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,7 +40,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
+    @available(iOS, deprecated=8.0)
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        print("routed back from twitter")
+        TwitterClient.sharedInstance.fetchAccessTokenWithPath( "oauth/access_token",
+            method: "POST",
+            requestToken: BDBOAuth1Credential(queryString: url.query),
+            success:
+            {
+                (accessToken: BDBOAuth1Credential!) -> Void in
+                
+                print("Got the access token!")
+                
+                TwitterClient.sharedInstance.requestSerializer.saveAccessToken(accessToken)
+                
+                TwitterClient.sharedInstance.GET( "1.1/account/verify_credentials.json",
+                    parameters: nil,
+                    success:
+                    {
+                        (operation: NSURLSessionDataTask?, response: AnyObject?) -> Void in
+                            print("user: \(response)")
+                        //todo
+                    },
+                    failure:
+                    {
+                        (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
+                            print("error verifying credentials")
+                        
+                    }
+                )
+            },
+            failure:
+            {
+                (error: NSError!) -> Void in
+                
+            }
+        )
+        return true
+    }
 
 }
 

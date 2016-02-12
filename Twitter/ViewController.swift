@@ -2,9 +2,6 @@
 //  ViewController.swift
 //  Twitter
 //
-//  Created by Sarn Wattanasri on 2/3/16.
-//  Copyright © 2016 Sarn. All rights reserved.
-//
 
 
 import UIKit
@@ -27,10 +24,14 @@ class ViewController: UIViewController {
         TwitterClient.sharedInstance.requestSerializer.removeAccessToken()
         TwitterClient.sharedInstance.fetchRequestTokenWithPath( "oauth/request_token",
             method: "GET",
-            callbackURL: NSURL(string: "cptwitterdemo://oauth"),
+            callbackURL: NSURL(string: "cptwitterot://oauth"),
             scope: nil,
             success: { (requestToken:BDBOAuth1Credential!) -> Void in
                 print("Got the request token")
+                //let authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
+                let authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
+                
+                UIApplication.sharedApplication().openURL(authURL!)
             },
             failure: { (error: NSError!) -> Void in
                 print("Falied to get request token")
