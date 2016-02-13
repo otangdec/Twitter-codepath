@@ -8,16 +8,34 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController {
+class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
+
+    @IBOutlet weak var tableView: UITableView!
+    
     var tweets: [Tweet]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+//        tableView.estimatedRowHeight = 120
+        
+        
+//        let bird = UIImage(named: "TwitterBird")
+//        let imageView = UIImageView(image:bird)
+//        self.navigationItem.titleView = imageView
 
         // Do any additional setup after loading the view.
         TwitterClient.sharedInstance.hometTimelineWithParams(nil, completion: { (tweets, error) -> () in
             self.tweets = tweets
+            
         })
+        
+        tableView.reloadData()
+
     }
     
 
@@ -30,14 +48,20 @@ class TweetsViewController: UIViewController {
         User.currentUser?.logout()
     }
 
-    /*
-    // MARK: - Navigation
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tweets != nil {
+            return tweets!.count
+        } else {
+            return 0
+        }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
-    */
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
+        
+        cell.tweet = tweets![indexPath.row]
+        return cell
+    }
 
 }
