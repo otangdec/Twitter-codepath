@@ -20,8 +20,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = UITableViewAutomaticDimension
-//        tableView.estimatedRowHeight = 120
+        //tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 120
         
         
 //        let bird = UIImage(named: "TwitterBird")
@@ -31,10 +31,11 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Do any additional setup after loading the view.
         TwitterClient.sharedInstance.hometTimelineWithParams(nil, completion: { (tweets, error) -> () in
             self.tweets = tweets
+            self.tableView.reloadData()
             
         })
         
-        tableView.reloadData()
+        
 
     }
     
@@ -61,6 +62,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
         
         cell.tweet = tweets![indexPath.row]
+        print(tweets![indexPath.row])
+        cell.user = tweets![indexPath.row].user
         return cell
     }
 

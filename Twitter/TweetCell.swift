@@ -10,12 +10,18 @@ import UIKit
 
 class TweetCell: UITableViewCell {
     
+    //@IBOutlet weak var tagLineLabel: UILabel!
+
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var tweetTextLabel: UILabel!
+    @IBOutlet weak var screenNameLabel: UILabel!
     
     var tweet: Tweet! {
         didSet {
-            
+            tweetTextLabel.text = tweet.text!
+
+           
 //            nameLabel.text = business.name
 //            if business.imageURL != nil {
 //                thumbImageView.setImageWithURL(business.imageURL!)
@@ -29,9 +35,22 @@ class TweetCell: UITableViewCell {
         }
     }
     
-    var user:User!{
+    var user: User! {
+        
         didSet {
             userNameLabel.text = user.name
+            screenNameLabel.text = "@\(user.screenName!)"
+            //tagLineLabel.text = user.tagline
+            print(user.profileImageUrl)
+            let url = NSURL( string: user.profileImageUrl! )
+
+            if let url = url {
+               userImageView.setImageWithURL( url )
+            }
+            
+            
+
+            
         }
     }
 
