@@ -17,9 +17,12 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
     
+    @IBOutlet weak var favCountLabel: UILabel!
+    
     var tweet: Tweet! {
         didSet {
             tweetTextLabel.text = tweet.text!
+//            favCountLabel.text = user.favCount
 
            
 //            nameLabel.text = business.name

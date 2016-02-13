@@ -24,9 +24,10 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.estimatedRowHeight = 120
         
         
-//        let bird = UIImage(named: "TwitterBird")
-//        let imageView = UIImageView(image:bird)
-//        self.navigationItem.titleView = imageView
+        let bird = UIImage(named: "TwitterBird")
+        let imageView = UIImageView(image:bird)
+
+        self.navigationItem.titleView = imageView
 
         // Do any additional setup after loading the view.
         TwitterClient.sharedInstance.hometTimelineWithParams(nil, completion: { (tweets, error) -> () in
@@ -67,4 +68,15 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "detailSegue" {
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)
+            let tweet = tweets![indexPath!.row]
+            
+            let detailViewController = segue.destinationViewController as! DetailViewController
+            detailViewController.tweet = tweet
+        }
+    }
 }
