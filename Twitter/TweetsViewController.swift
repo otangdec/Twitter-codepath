@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
@@ -14,6 +15,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     
     var tweets: [Tweet]?
+    var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,24 +25,41 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         
+        initializeRefreshControl()
+        networkRequest()
         
         let bird = UIImage(named: "TwitterBird")
         let imageView = UIImageView(image:bird)
 
         self.navigationItem.titleView = imageView
+        
+        
 
         // Do any additional setup after loading the view.
-        TwitterClient.sharedInstance.hometTimelineWithParams(nil, completion: { (tweets, error) -> () in
-            self.tweets = tweets
-            self.tableView.reloadData()
-            
-        })
-        
-        
 
     }
     
+    func networkRequest(){
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        TwitterClient.sharedInstance.hometTimelineWithParams(nil,
+            completion: { (tweets, error) -> () in
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+                self.tweets = tweets
+                self.tableView.reloadData()
+        })
+    }
     
+    func initializeRefreshControl(){
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl.addTarget(self,action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refreshControl)
+    }
+    
+    func refresh(sender:AnyObject){
+        networkRequest()
+        self.refreshControl.endRefreshing()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
