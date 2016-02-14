@@ -19,6 +19,8 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var timeTweetedLabel: UILabel!
+
     
     var isFavButtonOn: Bool = false
     var isRetweetButtonOn: Bool = false
@@ -29,6 +31,7 @@ class TweetCell: UITableViewCell {
     var tweet: Tweet! {
         didSet {
             tweetTextLabel.text = tweet.text!
+            timeTweetedLabel.text = tweet.timeInterval!
 //            favCountLabel.text = user.favCount
 
            
@@ -51,7 +54,6 @@ class TweetCell: UITableViewCell {
             userNameLabel.text = user.name
             screenNameLabel.text = "@\(user.screenName!)"
             //tagLineLabel.text = user.tagline
-            print(user.profileImageUrl)
             let url = NSURL( string: user.profileImageUrl! )
 
             if let url = url {
@@ -69,11 +71,11 @@ class TweetCell: UITableViewCell {
     @IBAction func onRetweetPress(sender: AnyObject) {
         if isRetweetButtonOn {
             retweetButton.setImage(UIImage(named: "retweet-action"), forState: UIControlState.Normal)
-            tweet.retweetCount--
+            tweet.retweetCount!--
             isRetweetButtonOn = false
         } else {
             retweetButton.setImage(UIImage(named: "retweet-action-on"), forState: UIControlState.Normal)
-            tweet.retweetCount++
+            tweet.retweetCount!++
             isRetweetButtonOn = true
         }
         retweetCountLabel.text = "\(tweet.retweetCount)"
