@@ -16,6 +16,13 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
+    @IBOutlet weak var retweetCountLabel: UILabel!
+    @IBOutlet weak var favButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
+    
+    var isFavButtonOn: Bool = false
+    var isRetweetButtonOn: Bool = false
+
     
     @IBOutlet weak var favCountLabel: UILabel!
     
@@ -50,12 +57,41 @@ class TweetCell: UITableViewCell {
             if let url = url {
                userImageView.setImageWithURL( url )
             }
-            
-            
 
-            
+            //favCountLabel.text = "\(user.favCount)"
+            favCountLabel.text = "\(user.favCount)"
+            retweetCountLabel.text = "\(tweet.retweetCount)"
+
         }
     }
+    
+    
+    @IBAction func onRetweetPress(sender: AnyObject) {
+        if isRetweetButtonOn {
+            retweetButton.setImage(UIImage(named: "retweet-action"), forState: UIControlState.Normal)
+            tweet.retweetCount--
+            isRetweetButtonOn = false
+        } else {
+            retweetButton.setImage(UIImage(named: "retweet-action-on"), forState: UIControlState.Normal)
+            tweet.retweetCount++
+            isRetweetButtonOn = true
+        }
+        retweetCountLabel.text = "\(tweet.retweetCount)"
+    }
+    
+    @IBAction func onFavouritePress(sender: AnyObject) {
+        if isFavButtonOn {
+            favButton.setImage(UIImage(named:"like-action"), forState: UIControlState.Normal)
+            isFavButtonOn = false
+            user.favCount--
+        } else {
+            favButton.setImage(UIImage(named:"like-action-on"), forState: UIControlState.Normal)
+            isFavButtonOn = true
+            user.favCount++
+        }
+        favCountLabel.text = "\(user.favCount)"
+    }
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -67,5 +103,6 @@ class TweetCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+
 
 }

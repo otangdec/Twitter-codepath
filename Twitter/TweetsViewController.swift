@@ -40,6 +40,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     }
     
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -63,7 +64,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
         
         cell.tweet = tweets![indexPath.row]
-        print(tweets![indexPath.row])
         cell.user = tweets![indexPath.row].user
         return cell
     }
