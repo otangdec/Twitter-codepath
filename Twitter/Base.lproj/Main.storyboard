@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="XcO-PN-yXb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="o9W-Bu-knj">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
@@ -8,7 +8,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bgC-zw-mu9"/>
                         <viewControllerLayoutGuide type="bottom" id="UjL-3S-h1o"/>
@@ -26,7 +26,7 @@
                                 </state>
                                 <connections>
                                     <action selector="onLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0hb-nc-FZt"/>
-                                    <segue destination="pr8-LU-T5n" kind="push" identifier="loginSegue" id="qTW-aY-aes"/>
+                                    <segue destination="pr8-LU-T5n" kind="push" identifier="loginSegue" id="0Ae-z5-sQa"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="twitter-bg" translatesAutoresizingMaskIntoConstraints="NO" id="IZM-18-F3v">
@@ -43,12 +43,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="641" y="321"/>
+            <point key="canvasLocation" x="1173" y="321"/>
         </scene>
-        <!--Title-->
+        <!--TweetsViewController-->
         <scene sceneID="asD-aF-nIp">
             <objects>
-                <viewController storyboardIdentifier="TweetsViewController" id="pr8-LU-T5n" customClass="TweetsViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TweetsViewController" title="TweetsViewController" id="pr8-LU-T5n" customClass="TweetsViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Poh-nr-stO"/>
                         <viewControllerLayoutGuide type="bottom" id="1O3-DV-sWa"/>
@@ -163,7 +163,6 @@
                                                 <constraint firstItem="qGv-ZP-MGR" firstAttribute="centerY" secondItem="vQr-2p-eOE" secondAttribute="centerY" id="Eqv-ag-avQ"/>
                                                 <constraint firstAttribute="trailing" secondItem="dze-PV-Xdr" secondAttribute="trailing" constant="-13" id="Kpn-ca-wSL"/>
                                                 <constraint firstAttribute="bottom" secondItem="7xF-9G-fAi" secondAttribute="bottom" constant="5.5" id="Ljf-pi-tZv"/>
-                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="7xF-9G-fAi" secondAttribute="trailing" constant="31" id="M8f-kq-YZA"/>
                                                 <constraint firstItem="dze-PV-Xdr" firstAttribute="leading" secondItem="ryu-8G-jRR" secondAttribute="trailing" constant="8" id="MdS-NQ-W9J"/>
                                                 <constraint firstItem="ryu-8G-jRR" firstAttribute="leading" secondItem="zNS-BW-WGy" secondAttribute="leading" constant="6" id="NYy-hJ-8cc"/>
                                                 <constraint firstItem="9b9-pg-6Li" firstAttribute="centerY" secondItem="vQr-2p-eOE" secondAttribute="centerY" id="Njj-BY-8Zm"/>
@@ -190,7 +189,7 @@
                                             <outlet property="tweetTextLabel" destination="dze-PV-Xdr" id="Lbe-LR-WjN"/>
                                             <outlet property="userImageView" destination="ryu-8G-jRR" id="Iqq-qz-7fa"/>
                                             <outlet property="userNameLabel" destination="vQr-2p-eOE" id="icf-YS-pzq"/>
-                                            <segue destination="OSk-4r-dDp" kind="push" identifier="detailSegue" id="EaS-Xq-ySc"/>
+                                            <segue destination="OSk-4r-dDp" kind="push" identifier="detailSegue" id="Bfx-lY-95f"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -224,7 +223,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5rj-e8-OGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1089" y="321"/>
+            <point key="canvasLocation" x="1637" y="321"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="SG8-e9-6z2">
@@ -250,26 +249,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m4v-TI-YtA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1480" y="321"/>
+            <point key="canvasLocation" x="2103" y="321"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="Hcs-kq-r0K">
+        <scene sceneID="JH3-JK-aYT">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XcO-PN-yXb" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o9W-Bu-knj" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="csJ-vl-DtU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cZI-La-jgL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="G7q-Ov-lbI"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ZmZ-GW-eWD"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="y8S-47-aS7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6tn-bH-3mQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="109" y="321"/>
+            <point key="canvasLocation" x="641" y="321"/>
         </scene>
     </scenes>
     <resources>

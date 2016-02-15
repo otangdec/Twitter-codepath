@@ -27,11 +27,12 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         initializeRefreshControl()
         networkRequest()
+        self.navigationItem.title = "Tweet"
         
-        let bird = UIImage(named: "TwitterBird")
-        let imageView = UIImageView(image:bird)
-
-        self.navigationItem.titleView = imageView
+//        let bird = UIImage(named: "TwitterBird")
+//        let imageView = UIImageView(image:bird)
+//
+//        self.navigationItem.titleView = imageView
         
         
 
@@ -94,7 +95,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let indexPath = tableView.indexPathForCell(cell)
             let tweet = tweets![indexPath!.row]
             
-            let detailViewController = segue.destinationViewController as! DetailViewController
+            let detailViewController = segue.destinationViewController  as! DetailViewController
             detailViewController.tweet = tweet
         }
     }
