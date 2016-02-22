@@ -32,8 +32,6 @@ class Tweet: NSObject {
         createdAt = formatter.stringFromDate(createdAtDate!)
         retweetCount = dictionary["retweet_count"] as! Int
         timeInterval = calculateTimeInterval(createdAtDate!)
-        print(timeInterval)
-
 
     }
     

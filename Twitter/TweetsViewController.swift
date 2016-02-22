@@ -29,16 +29,17 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         networkRequest()
         self.navigationItem.title = "Tweet"
         
+        tableView.reloadData()
+        
 //        let bird = UIImage(named: "TwitterBird")
 //        let imageView = UIImageView(image:bird)
 //
 //        self.navigationItem.titleView = imageView
-        
-        
-
-        // Do any additional setup after loading the view.
-
     }
+    
+//    override func viewDidAppear(animated: Bool) {
+//        tableView.reloadData()
+//    }
     
     func networkRequest(){
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
