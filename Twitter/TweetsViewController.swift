@@ -27,13 +27,15 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         initializeRefreshControl()
         networkRequest()
+        initializeNavigationBar()
+
+    }
+    
+    func initializeNavigationBar(){
         self.navigationItem.title = "Tweet"
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: nil, action: nil)
         
-        
-        //        let bird = UIImage(named: "TwitterBird")
-        //        let imageView = UIImageView(image:bird)
-        //
-        //        self.navigationItem.titleView = imageView
     }
     
     override func viewWillAppear(animated: Bool) {

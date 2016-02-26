@@ -16,6 +16,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.backBarButtonItem?.tintColor = UIColor.whiteColor()
         // Do any additional setup after loading the view.
     }
 
