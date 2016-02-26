@@ -26,7 +26,7 @@
                                 </state>
                                 <connections>
                                     <action selector="onLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0hb-nc-FZt"/>
-                                    <segue destination="uwJ-kU-kyu" kind="modal" identifier="loginSegue" id="0Ae-z5-sQa"/>
+                                    <segue destination="uwJ-kU-kyu" kind="modal" identifier="loginSegue" modalTransitionStyle="flipHorizontal" id="0Ae-z5-sQa"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="twitter-bg" translatesAutoresizingMaskIntoConstraints="NO" id="IZM-18-F3v">
@@ -43,7 +43,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1173" y="321"/>
+            <point key="canvasLocation" x="1705" y="321"/>
         </scene>
         <!--TweetsViewController-->
         <scene sceneID="asD-aF-nIp">
@@ -223,7 +223,77 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5rj-e8-OGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2169" y="321"/>
+            <point key="canvasLocation" x="2693" y="-9"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="xWB-qa-Pbd">
+            <objects>
+                <viewController storyboardIdentifier="ProfileViewController" id="CSA-1m-KeI" customClass="ProfileViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XZz-z6-lQ7"/>
+                        <viewControllerLayoutGuide type="bottom" id="hfU-Uq-1Iz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Jq-Se-WRH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UserName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ei5-RN-60n">
+                                <rect key="frame" x="7" y="134" width="128" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="@handle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnC-Oo-j4g">
+                                <rect key="frame" x="7" y="155" width="121" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.45377263309999999" green="0.45377263309999999" blue="0.45377263309999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Twitter-logo" translatesAutoresizingMaskIntoConstraints="NO" id="mUK-q3-FIW">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
+                                <animations/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TwitterBird" translatesAutoresizingMaskIntoConstraints="NO" id="Ni4-as-ZHS">
+                                <rect key="frame" x="7" y="61" width="56" height="56"/>
+                                <animations/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZg-VV-uhv">
+                                <rect key="frame" x="35" y="211" width="108" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="6nd-Lw-Gia">
+                                <rect key="frame" x="7" y="212" width="20" height="20"/>
+                                <animations/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="user description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2S-kY-r0M">
+                                <rect key="frame" x="7" y="177" width="307" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Vub-B9-tm5"/>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="v2S-kY-r0M" id="CMF-Kc-eSQ"/>
+                        <outlet property="handleLabel" destination="fnC-Oo-j4g" id="tZ2-7E-mmg"/>
+                        <outlet property="locationLabel" destination="SZg-VV-uhv" id="n0o-ug-Z1T"/>
+                        <outlet property="userHeaderImageView" destination="mUK-q3-FIW" id="D7A-XC-h1h"/>
+                        <outlet property="userNameLabel" destination="ei5-RN-60n" id="eJE-Qa-75S"/>
+                        <outlet property="userProfileImageView" destination="Ni4-as-ZHS" id="Tb1-2H-Krm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N92-YH-znk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2675" y="710"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="SG8-e9-6z2">
@@ -249,7 +319,45 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m4v-TI-YtA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2635" y="321"/>
+            <point key="canvasLocation" x="3157" y="-9"/>
+        </scene>
+        <!--Notification View Controller-->
+        <scene sceneID="813-lN-t8u">
+            <objects>
+                <viewController storyboardIdentifier="NotificationViewController" id="kN5-fl-3wf" customClass="NotificationViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0eV-hf-ie2"/>
+                        <viewControllerLayoutGuide type="bottom" id="acT-Av-8Bs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zk0-m7-2Vy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WEE-yC-kmw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3089" y="700"/>
+        </scene>
+        <!--Message View Controller-->
+        <scene sceneID="tVN-yu-c6f">
+            <objects>
+                <viewController storyboardIdentifier="MessageViewController" id="Bwi-ZZ-rkv" customClass="MessageViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="utW-Oj-tJC"/>
+                        <viewControllerLayoutGuide type="bottom" id="N2U-Oy-JT4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Cno-N2-FKs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FVh-K0-ufX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3480" y="696"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AD1-2F-XRj">
@@ -269,12 +377,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wUI-KS-uyr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1637" y="321"/>
+            <point key="canvasLocation" x="2162" y="315"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Twitter-logo" width="320" height="125"/>
         <image name="TwitterBird" width="843" height="843"/>
         <image name="like-action" width="54" height="72"/>
+        <image name="location" width="25" height="25"/>
         <image name="reply-action_0" width="65" height="72"/>
         <image name="retweet-action" width="75" height="72"/>
         <image name="twitter-bg" width="2100" height="790"/>

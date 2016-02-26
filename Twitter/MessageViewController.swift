@@ -1,17 +1,14 @@
 //
-//  DetailViewController.swift
+//  MessageViewController.swift
 //  Twitter
 //
-//  Created by Oranuch on 2/13/16.
+//  Created by Oranuch on 2/23/16.
 //  Copyright © 2016 Sarn. All rights reserved.
 //
 
 import UIKit
 
-class DetailViewController: UIViewController {
-    
-    
-    var tweet: Tweet!
+class MessageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

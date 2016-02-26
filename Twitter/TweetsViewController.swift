@@ -29,18 +29,41 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         networkRequest()
         self.navigationItem.title = "Tweet"
         
-        tableView.reloadData()
         
-//        let bird = UIImage(named: "TwitterBird")
-//        let imageView = UIImageView(image:bird)
-//
-//        self.navigationItem.titleView = imageView
+        //        let bird = UIImage(named: "TwitterBird")
+        //        let imageView = UIImageView(image:bird)
+        //
+        //        self.navigationItem.titleView = imageView
     }
     
-//    override func viewDidAppear(animated: Bool) {
-//        tableView.reloadData()
-//    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+//
+//        delay(5, closure: {
+//            self.refresh(self)
+//        })
+//        self.tableView.reloadData()
+        
+        
+    }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        
+    }
+    
+    func delay(delay: Double, closure: () -> () ) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure
+        )
+    }
+    
+   
     func networkRequest(){
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         TwitterClient.sharedInstance.hometTimelineWithParams(nil,
@@ -62,6 +85,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         networkRequest()
         self.refreshControl.endRefreshing()
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

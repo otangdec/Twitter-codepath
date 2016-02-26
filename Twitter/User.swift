@@ -20,8 +20,18 @@ class User: NSObject {
     var tagline: String?
     var dictionary: NSDictionary
     var favCount: Int
+    var location: String?
+    var profileBGImageUrl: String?
+    var userDescription: String?
     
+    
+
     init(dictionary: NSDictionary){
+        
+        for dict in dictionary{
+            print( dict)
+        }
+        
         self.dictionary = dictionary
         
         name = dictionary["name"] as? String
@@ -29,6 +39,9 @@ class User: NSObject {
         profileImageUrl = dictionary["profile_image_url"] as? String
         tagline = dictionary["description"] as? String
         favCount = dictionary["favourites_count"] as! Int
+        location = dictionary["location"] as? String
+        profileBGImageUrl = dictionary["profile_banner_url"] as? String
+        userDescription = dictionary["descriotion"] as? String
         
     }
     

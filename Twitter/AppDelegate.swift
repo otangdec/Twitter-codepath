@@ -15,15 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var storyboard = UIStoryboard(name: "Main", bundle: nil)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        
         // Override point for customization after application launch.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
         
-        if User.currentUser != nil {
+        if let _  = User.currentUser {
             // Go to the logged in screen
-            let vc = storyboard.instantiateViewControllerWithIdentifier("TwitterNavigationController")
+            let vc = storyboard.instantiateViewControllerWithIdentifier("TwitterNavigationController")             
             
             window?.rootViewController = vc
         }
+        
+        
+        initializeTabBar()
         return true
     }
 
@@ -59,6 +64,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         TwitterClient.sharedInstance.openURL(url)
                 return true
+    }
+    
+    func initializeTabBar() {
+        //first tab item
+        let tweetsViewController = storyboard.instantiateViewControllerWithIdentifier("TwitterNavigationController") as! UINavigationController
+        tweetsViewController.tabBarItem.title = "Timeline"
+        tweetsViewController.tabBarItem.image = UIImage(named: "home")
+
+        //second tab item
+        let notificationViewController = storyboard.instantiateViewControllerWithIdentifier("NotificationViewController")
+        notificationViewController.tabBarItem.title = "Notification"
+        notificationViewController.tabBarItem.image = UIImage(named: "notification")
+        
+        //third tab item
+        let messageViewController = storyboard.instantiateViewControllerWithIdentifier("MessageViewController")
+        messageViewController.tabBarItem.title = "Message"
+        messageViewController.tabBarItem.image = UIImage(named: "message")
+        
+        //fourth tab item
+        let profileViewController = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController")
+        profileViewController.tabBarItem.title = "Profile"
+        profileViewController.tabBarItem.image = UIImage(named: "profile")
+
+
+        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [tweetsViewController, notificationViewController, messageViewController, profileViewController]
+        tabBarController.tabBar.barTintColor = UIColor.whiteColor()
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
     }
 
 }

@@ -59,13 +59,23 @@ class TweetCell: UITableViewCell {
             if let url = url {
                userImageView.setImageWithURL( url )
             }
+            
+            self.userImageView.layer.cornerRadius = 8
+            self.userImageView.layer.borderWidth = 3
+            self.userImageView.layer.borderColor = UIColor.whiteColor().CGColor
+            self.userImageView.clipsToBounds = true
+
 
             //favCountLabel.text = "\(user.favCount)"
             favCountLabel.text = "\(user.favCount)"
             retweetCountLabel.text = "\(tweet.retweetCount)"
 
         }
+        
+        
     }
+    
+    
     
     
     @IBAction func onRetweetPress(sender: AnyObject) {
