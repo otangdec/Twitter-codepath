@@ -8,15 +8,19 @@
 
 import UIKit
 
-class ComposeViewController: UIViewController {
+class ComposeViewController: UIViewController, UITextViewDelegate {
 
-    @IBOutlet weak var tweetTextField: UITextField!
+    @IBOutlet weak var tweetTextView: UITextView!
     @IBOutlet weak var numCharLeft: UILabel!
+    @IBOutlet weak var tweetButton: UIButton!
     
+    @IBOutlet weak var userImageView: UIImageView!
     var tweetText: String?
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tweetButton.layer.cornerRadius = 5
+        tweetTextView.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -31,19 +35,16 @@ class ComposeViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    @IBAction func onTyping(sender: AnyObject) {
-        numCharLeft.text =  "\(140 - tweetTextField.text!.characters.count)"
-        
-        
-    }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        numCharLeft.text =  "\(140 - tweetTextView.text!.utf16.count)"
+        return true
     }
-    */
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+            tweetTextView.text = nil
+            tweetTextView.textColor = UIColor.blackColor()
+    }
 
 }
