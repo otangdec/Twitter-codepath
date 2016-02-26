@@ -76,7 +76,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5D9C35DA-B838-423F-A3DD-C9809E2F34A7" translatesAutoresizingMaskIntoConstraints="NO" id="ryu-8G-jRR">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="75BF4B81-0D6A-4BA5-AD42-E87BB4C21FAA" translatesAutoresizingMaskIntoConstraints="NO" id="ryu-8G-jRR">
                                                     <rect key="frame" x="6" y="7" width="56" height="56"/>
                                                     <animations/>
                                                     <constraints>
@@ -401,18 +401,14 @@
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="onTyping:" destination="G3u-E8-LE1" eventType="editingChanged" id="51B-F4-MU8"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Count:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Vg-py-ePq">
                                 <rect key="frame" x="150" y="148" width="51" height="21"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.45377263309999999" green="0.45377263309999999" blue="0.45377263309999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="num of char" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JwP-f7-aiu">
-                                <rect key="frame" x="209" y="148" width="92" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.45377263309999999" green="0.45377263309999999" blue="0.45377263309999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -427,10 +423,21 @@
                                     <action selector="doneCompose:" destination="G3u-E8-LE1" eventType="touchDown" id="ENo-aA-lUr"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="140" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JwP-f7-aiu">
+                                <rect key="frame" x="233" y="148" width="29" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.45377263309999999" green="0.45377263309999999" blue="0.45377263309999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="numCharLeft" destination="JwP-f7-aiu" id="Due-q0-BPR"/>
+                        <outlet property="tweetTextField" destination="1de-tJ-hYB" id="VXM-A0-H0n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7TS-g5-2RA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -738,7 +745,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="5D9C35DA-B838-423F-A3DD-C9809E2F34A7" width="843" height="843">
+        <image name="75BF4B81-0D6A-4BA5-AD42-E87BB4C21FAA" width="843" height="843">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

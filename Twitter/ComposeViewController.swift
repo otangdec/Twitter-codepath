@@ -10,6 +10,10 @@ import UIKit
 
 class ComposeViewController: UIViewController {
 
+    @IBOutlet weak var tweetTextField: UITextField!
+    @IBOutlet weak var numCharLeft: UILabel!
+    
+    var tweetText: String?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,6 +31,11 @@ class ComposeViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    @IBAction func onTyping(sender: AnyObject) {
+        numCharLeft.text =  "\(140 - tweetTextField.text!.characters.count)"
+        
+        
+    }
     /*
     // MARK: - Navigation
 
