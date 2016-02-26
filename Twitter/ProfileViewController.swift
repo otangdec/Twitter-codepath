@@ -16,6 +16,15 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var userProfileImageView: UIImageView!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var numFollowingLabel: UILabel!
+    
+    @IBOutlet weak var numFollowersLabel: UILabel!
+    
+    @IBOutlet weak var composeButton: UIButton!
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var settingButton: UIButton!
+    @IBOutlet weak var accountButton: UIButton!
+    @IBOutlet weak var editProfileButton: UIButton!
     
     var user: User?
     
@@ -40,14 +49,35 @@ class ProfileViewController: UIViewController {
 
         locationLabel.text = user!.location
         
-        descriptionLabel.text = user!.description
+        descriptionLabel.text = user!.userDescription
+        
+//        editProfileButton.layer.borderWidth = 1
+//        editProfileButton.layer.cornerRadius = 5
+//        editProfileButton.layer.borderColor = UIColor.grayColor().CGColor
+
+        setBorder(editProfileButton,borderWidth: 1.0,cornerRadius: 5.0,borderColor: UIColor.grayColor())
+
+        
+        
+//        print("FOLLOWERS: \(user?.followersCount)")
+//        print("FOLLOWING: \(user?.followingCount)")
+        
+        numFollowersLabel.text = String(user!.followersCount!)
+        
+        numFollowingLabel.text = String(user!.followingCount!)
+        
 
     
         
         
         // Do any additional setup after loading the view.
     }
-    
+    func setBorder(button: UIButton, borderWidth: CGFloat, cornerRadius: CGFloat, borderColor: UIColor){
+        button.layer.borderWidth = borderWidth
+        button.layer.cornerRadius = cornerRadius
+        button.layer.borderColor = borderColor.CGColor
+        
+    }
     func customizeProfileImage(){
         self.userProfileImageView.layer.cornerRadius = 8
         self.userProfileImageView.layer.borderWidth = 3
@@ -59,6 +89,11 @@ class ProfileViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent;
+    }
+
     
     /*
     // Only override drawRect: if you perform custom drawing.

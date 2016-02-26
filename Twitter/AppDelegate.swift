@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             window?.rootViewController = vc
         }
-        
+    
         
         initializeTabBar()
         return true
@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [tweetsViewController, notificationViewController, messageViewController, profileViewController]
-        tabBarController.tabBar.barTintColor = UIColor.whiteColor()
+        tabBarController.tabBar.tintColor = UIColor(red: 70/255, green: 181/255, blue: 251/255, alpha: 1)
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }

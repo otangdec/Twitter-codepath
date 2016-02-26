@@ -23,14 +23,11 @@ class User: NSObject {
     var location: String?
     var profileBGImageUrl: String?
     var userDescription: String?
-    
+    var followersCount: Int?
+    var followingCount: Int?
     
 
     init(dictionary: NSDictionary){
-        
-        for dict in dictionary{
-            print( dict)
-        }
         
         self.dictionary = dictionary
         
@@ -41,8 +38,9 @@ class User: NSObject {
         favCount = dictionary["favourites_count"] as! Int
         location = dictionary["location"] as? String
         profileBGImageUrl = dictionary["profile_banner_url"] as? String
-        userDescription = dictionary["descriotion"] as? String
-        
+        userDescription = dictionary["description"] as? String
+        followersCount = dictionary["followers_count"] as? Int
+        followingCount = dictionary["friends_count"] as? Int
     }
     
     func logout() {
