@@ -15,7 +15,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var tweetButton: UIButton!
     
     @IBOutlet weak var userImageView: UIImageView!
-    var tweetText: String?
+    var numLeft: Int?
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,13 +41,22 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
 
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        numCharLeft.text =  "\(140 - tweetTextView.text!.utf16.count)"
+        
+        numLeft =  140 - tweetTextView.text!.utf16.count
+        numCharLeft.text = "\(numLeft!)"
+        
+        // If no more character allows, textview will not accept anymore character
+        // users can use backspace to delete the character
+        if numLeft == 0{
+            tweetTextView.deleteBackward()
+        }
+
         return true
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
-            tweetTextView.text = nil
-            tweetTextView.textColor = UIColor.blackColor()
+        tweetTextView.text = nil
+        tweetTextView.textColor = UIColor.blackColor()
     }
 
 }
