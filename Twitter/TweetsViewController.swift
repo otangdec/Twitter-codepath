@@ -11,6 +11,7 @@ import MBProgressHUD
 
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
+    @IBOutlet weak var composeButton: UIBarButtonItem!
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -31,12 +32,15 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     }
     
+
+    
     func initializeNavigationBar(){
         self.navigationItem.title = "Tweet"
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: nil, action: nil)
         
     }
+
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
@@ -122,9 +126,11 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
             let tweet = tweets![indexPath!.row]
+            let user = tweets![indexPath!.row].user
             
             let detailViewController = segue.destinationViewController  as! DetailViewController
             detailViewController.tweet = tweet
+            detailViewController.user = user
         }
     }
 }

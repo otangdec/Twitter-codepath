@@ -31,41 +31,33 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        user = User.currentUser!
-        
-        userNameLabel.text = user?.name
-        handleLabel.text = "@" + user!.screenName!
-        let url = NSURL( string: user!.profileImageUrl! )
-        let bgUrl = NSURL( string: user!.profileBGImageUrl!)
-        
-        if let url = url {
-            userProfileImageView.setImageWithURL( url )
+        if User.currentUser != nil{
+            user = User.currentUser!
+            
+            userNameLabel.text = user?.name
+            handleLabel.text = "@" + user!.screenName!
+            let url = NSURL( string: user!.profileImageUrl! )
+            let bgUrl = NSURL( string: user!.profileBGImageUrl!)
+            
+            if let url = url {
+                userProfileImageView.setImageWithURL( url )
+            }
+            if let bgUrl = bgUrl {
+                userHeaderImageView.setImageWithURL(bgUrl)
+            }
+            
+            customizeProfileImage()
+
+            locationLabel.text = user!.location
+            
+            descriptionLabel.text = user!.userDescription
+
+            setBorder(editProfileButton,borderWidth: 1.0,cornerRadius: 5.0,borderColor: UIColor.grayColor())
+            
+            numFollowersLabel.text = String(user!.followersCount!)
+            
+            numFollowingLabel.text = String(user!.followingCount!)
         }
-        if let bgUrl = bgUrl {
-            userHeaderImageView.setImageWithURL(bgUrl)
-        }
-        
-        customizeProfileImage()
-
-        locationLabel.text = user!.location
-        
-        descriptionLabel.text = user!.userDescription
-        
-//        editProfileButton.layer.borderWidth = 1
-//        editProfileButton.layer.cornerRadius = 5
-//        editProfileButton.layer.borderColor = UIColor.grayColor().CGColor
-
-        setBorder(editProfileButton,borderWidth: 1.0,cornerRadius: 5.0,borderColor: UIColor.grayColor())
-
-        
-        
-//        print("FOLLOWERS: \(user?.followersCount)")
-//        print("FOLLOWING: \(user?.followingCount)")
-        
-        numFollowersLabel.text = String(user!.followersCount!)
-        
-        numFollowingLabel.text = String(user!.followingCount!)
-        
 
     
         

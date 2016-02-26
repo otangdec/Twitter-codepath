@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func initializeTabBar() {
         //first tab item
         let tweetsViewController = storyboard.instantiateViewControllerWithIdentifier("TwitterNavigationController") as! UINavigationController
-        tweetsViewController.tabBarItem.title = "Timeline"
+        tweetsViewController.tabBarItem.title = "Home"
         tweetsViewController.tabBarItem.image = UIImage(named: "home")
 
         //second tab item
@@ -84,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //fourth tab item
         let profileViewController = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController")
-        profileViewController.tabBarItem.title = "Profile"
+        profileViewController.tabBarItem.title = "Me"
         profileViewController.tabBarItem.image = UIImage(named: "profile")
 
 
