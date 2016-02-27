@@ -9,22 +9,28 @@
 import UIKit
 import MBProgressHUD
 
-class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate{
 
     @IBOutlet weak var composeButton: UIBarButtonItem!
 
     @IBOutlet weak var tableView: UITableView!
-    
+
     var tweets: [Tweet]?
     var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        
         tableView.delegate = self
         tableView.dataSource = self
         //tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
+        
+        
+        
         
         initializeRefreshControl()
         networkRequest()
@@ -32,7 +38,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     }
     
-
     
     func initializeNavigationBar(){
         self.navigationItem.title = "Tweet"
@@ -44,6 +49,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        self.tableView.reloadData()
 //
 //        delay(5, closure: {
 //            self.refresh(self)
@@ -69,6 +75,26 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         )
     }
     
+    func myModalDidFinish(controller: ComposeViewController) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func getTimelineTweets(){
+        self.refreshControl.beginRefreshing()
+        let completion = {(tweets: [Tweet]?, error: NSError?) -> () in
+            self.tweets = tweets
+            self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
+        }
+        
+        TwitterClient.sharedInstance.homeTimeline(completion)
+        
+    }
+    
+    func createdTweet(composeViewController: ComposeViewController) {
+        self.getTimelineTweets()
+        print("In CreatedTweet")
+    }
    
     func networkRequest(){
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
@@ -131,6 +157,11 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let detailViewController = segue.destinationViewController  as! DetailViewController
             detailViewController.tweet = tweet
             detailViewController.user = user
+        }
+        
+        if segue.identifier == "composeSegue" {
+            let composeViewController = segue.destinationViewController as! ComposeViewController
+            composeViewController.delegate = self
         }
     }
 }

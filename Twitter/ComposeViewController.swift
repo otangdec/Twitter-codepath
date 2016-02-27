@@ -8,8 +8,9 @@
 
 import UIKit
 
-protocol ComposeViewControllerDelegate : class {
+protocol ComposeViewControllerDelegate {
     func createdTweet(composeViewController: ComposeViewController)
+    //func myModalDidFinish(controller:ComposeViewController)
 }
 
 class ComposeViewController: UIViewController, UITextViewDelegate {
@@ -21,8 +22,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var handleLabel: UILabel!
     
     @IBOutlet weak var userImageView: UIImageView!
+
     
-    weak var delegate: ComposeViewControllerDelegate?
+    var delegate: ComposeViewControllerDelegate?
+    
     var numLeft: Int?
     var user: User?
 
@@ -53,10 +56,18 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func onTweetButtonPressed(sender: AnyObject) {
+        
+        print("in onTweetButtonPressed")
         TwitterClient.sharedInstance.postTweet(tweetTextView.text)
+        
         self.delegate?.createdTweet(self)
+        
         // close the viewcontroller after finish tweeting
-        self.dismissViewControllerAnimated(true, completion: nil)
+        //self.delegate?.myModalDidFinish(self)
+        //self.dismissViewControllerAnimated(true, completion: nil)
+        
+        
+
     }
 
     @IBAction func doneCompose(sender: AnyObject) {
