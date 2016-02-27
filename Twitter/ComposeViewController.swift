@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ComposeViewControllerDelegate : class {
+    func createdTweet(composeViewController: ComposeViewController)
+}
+
 class ComposeViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var tweetTextView: UITextView!
@@ -16,21 +20,33 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var usernameLabel: UILabel!
     
     @IBOutlet weak var userImageView: UIImageView!
+    
+    weak var delegate: ComposeViewControllerDelegate?
     var numLeft: Int?
-    
-    
+    var user: User?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tweetButton.layer.cornerRadius = 5
         tweetTextView.delegate = self
+  
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func onTweetButtonPressed(sender: AnyObject) {
+        TwitterClient.sharedInstance.postTweet(tweetTextView.text)
+        print("Posted status: \(tweetTextView.text)")
+        
+        self.delegate?.createdTweet(self)
+        
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
 
     @IBAction func doneCompose(sender: AnyObject) {

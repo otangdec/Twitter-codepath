@@ -38,15 +38,19 @@ class TwitterClient: BDBOAuth1SessionManager {
                 print("error getting home timeline")
                 completion(tweets: nil, error: error)
             })
+    }
+    
+    func postTweet(status: String) {
+        let params = ["status": status]
         
-        //                GET("1.1/statuses/home_timeline.json", parameters: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-//        
-//        let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
-//        completion(tweets: tweets, error: nil)
-//        
-//    }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-//    completion(tweets: nil, error: error)
-
+        POST("1.1/statuses/update.json",
+            parameters: params,
+            success: {(operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                print("Posted status: \(status)")
+            },
+            failure: { (operation: NSURLSessionDataTask?, error: NSError!) -> Void in
+                print("Failed to post status with text:\(status)")
+        })
     }
 
     func loginWithCompletion(completion: (user: User?, error: NSError?) -> ()) {
