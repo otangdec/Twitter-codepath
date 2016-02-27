@@ -13,6 +13,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var tweetTextView: UITextView!
     @IBOutlet weak var numCharLeft: UILabel!
     @IBOutlet weak var tweetButton: UIButton!
+    @IBOutlet weak var usernameLabel: UILabel!
     
     @IBOutlet weak var userImageView: UIImageView!
     var numLeft: Int?
