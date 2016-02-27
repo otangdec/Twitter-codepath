@@ -18,6 +18,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var numCharLeft: UILabel!
     @IBOutlet weak var tweetButton: UIButton!
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var handleLabel: UILabel!
     
     @IBOutlet weak var userImageView: UIImageView!
     
@@ -31,6 +32,17 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
 
         tweetButton.layer.cornerRadius = 5
         tweetTextView.delegate = self
+        
+        if User.currentUser != nil{
+            user = User.currentUser!
+
+            usernameLabel.text = user?.name
+            handleLabel.text = "@" + (user?.screenName)!
+            let url = NSURL( string: user!.profileImageUrl! )
+            if let url = url {
+                userImageView.setImageWithURL( url )
+            }
+        }
   
         // Do any additional setup after loading the view.
     }
@@ -42,11 +54,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func onTweetButtonPressed(sender: AnyObject) {
         TwitterClient.sharedInstance.postTweet(tweetTextView.text)
-        print("Posted status: \(tweetTextView.text)")
-        
         self.delegate?.createdTweet(self)
-        
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        // close the viewcontroller after finish tweeting
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     @IBAction func doneCompose(sender: AnyObject) {
