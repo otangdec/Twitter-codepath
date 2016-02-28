@@ -8,7 +8,12 @@
 
 import UIKit
 
-class TweetCell: UITableViewCell {
+
+protocol TweetCellDelegate : class {
+    func didReply(tweetCell : TweetCell)
+}
+
+class TweetCell: UITableViewCell{
     
     //@IBOutlet weak var tagLineLabel: UILabel!
 
@@ -18,13 +23,16 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var favButton: UIButton!
+    @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var timeTweetedLabel: UILabel!
 
     
     var isFavButtonOn: Bool = false
     var isRetweetButtonOn: Bool = false
-
+    var delegate: TweetCellDelegate?
+    
+    
     
     @IBOutlet weak var favCountLabel: UILabel!
     
@@ -32,19 +40,8 @@ class TweetCell: UITableViewCell {
         didSet {
             tweetTextLabel.text = tweet.text!
             timeTweetedLabel.text = tweet.timeInterval!
-//            favCountLabel.text = user.favCount
-
-           
-//            nameLabel.text = business.name
-//            if business.imageURL != nil {
-//                thumbImageView.setImageWithURL(business.imageURL!)
-//            }
-//            catagoriesLabel.text = business.categories
-//            addressLabel.text = business.fullAddress
-//            reviewsCountLabel.text = "\(business.reviewCount!) Reviews"
-//            ratingImageView.setImageWithURL(business.ratingImageURL!)
-//            distanceLabel.text = business.distance
             
+
         }
     }
     
@@ -71,11 +68,17 @@ class TweetCell: UITableViewCell {
             retweetCountLabel.text = "\(tweet.retweetCount)"
 
         }
-        
-        
+    }
+    
+    func getUser(tweetsViewController: TweetsViewController)-> String {
+        return user.screenName!
     }
     
     
+    @IBAction func onReplyPress(sender: AnyObject) {
+        print("On Reply Press")
+        self.delegate?.didReply(self)
+    }
     
     
     @IBAction func onRetweetPress(sender: AnyObject) {
@@ -108,13 +111,11 @@ class TweetCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.replyButton.setImage(UIImage(named: "reply-action-pressed_0") as UIImage?, forState: .Selected)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
-
-
 }

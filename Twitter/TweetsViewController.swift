@@ -9,7 +9,11 @@
 import UIKit
 import MBProgressHUD
 
-class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate{
+//protocol TweetsViewControllerDelegate : class {
+//    func getUser(tweetsViewController: TweetsViewController) -> String
+//}
+
+class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, TweetCellDelegate{
 
     @IBOutlet weak var composeButton: UIBarButtonItem!
 
@@ -17,20 +21,17 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     var tweets: [Tweet]?
     var refreshControl: UIRefreshControl!
+    //var delegate: TweetsViewControllerDelegate?
+    var userScreenName: String?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
         
         tableView.delegate = self
         tableView.dataSource = self
         //tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
-        
-        
-        
         
         initializeRefreshControl()
         networkRequest()
@@ -49,7 +50,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        self.tableView.reloadData()
 //
 //        delay(5, closure: {
 //            self.refresh(self)
@@ -61,7 +61,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-        
         
     }
     
@@ -75,11 +74,15 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         )
     }
     
+    // Delegate Methods
     func myModalDidFinish(controller: ComposeViewController) {
+        print("Closing Modal Compose view")
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func getTimelineTweets(){
+    func createdTweet(composeViewController: ComposeViewController) {
+//        self.getTimelineTweets()
+        print("In CreatedTweet")
         self.refreshControl.beginRefreshing()
         let completion = {(tweets: [Tweet]?, error: NSError?) -> () in
             self.tweets = tweets
@@ -88,13 +91,18 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         TwitterClient.sharedInstance.homeTimeline(completion)
-        
+ 
     }
     
-    func createdTweet(composeViewController: ComposeViewController) {
-        self.getTimelineTweets()
-        print("In CreatedTweet")
+    func didReply(tweetCell: TweetCell) {
+        
+        print("Did Reply")
+//        userScreenName = self.delegate?.getUser(self)
+//        print("UserScreenName: \(userScreenName)")
+        userScreenName = "TEST TEST"
+        performSegueWithIdentifier("replyFromHomeSegue", sender: self)
     }
+    
    
     func networkRequest(){
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
@@ -109,15 +117,19 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func initializeRefreshControl(){
         self.refreshControl = UIRefreshControl()
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.refreshControl.addTarget(self,action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
         self.tableView.addSubview(refreshControl)
     }
     
-    func refresh(sender:AnyObject){
+//    func refresh(sender:AnyObject){
+//        networkRequest()
+//        self.refreshControl.endRefreshing()
+//    }
+
+    func onRefresh(){
         networkRequest()
         self.refreshControl.endRefreshing()
     }
-    
     
 
     override func didReceiveMemoryWarning() {
@@ -140,7 +152,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
-        
+        cell.delegate = self
         cell.tweet = tweets![indexPath.row]
         cell.user = tweets![indexPath.row].user
         return cell
@@ -152,8 +164,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
             let tweet = tweets![indexPath!.row]
-            let user = tweets![indexPath!.row].user
-            
+            let user = tweets![indexPath!.row].user!
             let detailViewController = segue.destinationViewController  as! DetailViewController
             detailViewController.tweet = tweet
             detailViewController.user = user
@@ -162,6 +173,13 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if segue.identifier == "composeSegue" {
             let composeViewController = segue.destinationViewController as! ComposeViewController
             composeViewController.delegate = self
+            
         }
+        if segue.identifier == "replyFromHomeSegue" {
+            let composeViewController = segue.destinationViewController as! ComposeViewController
+            print("User Screen Name: \(userScreenName)")
+            composeViewController.replyToUserScreenName = userScreenName
+        }
+        
     }
 }

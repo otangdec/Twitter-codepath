@@ -8,6 +8,10 @@
 
 import UIKit
 
+//protocol UserProfileViewControllerDelegate {
+//    func getUserInfo()
+//}
+
 class UserProfileViewController: UIViewController {
     
     @IBOutlet weak var userNameLabel: UILabel!
@@ -24,9 +28,13 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
     
+    
+    var tweet: Tweet!
+    var user: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        userNameLabel.text = user.name
 
         // Do any additional setup after loading the view.
     }

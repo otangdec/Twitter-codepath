@@ -10,7 +10,7 @@ import UIKit
 
 protocol ComposeViewControllerDelegate {
     func createdTweet(composeViewController: ComposeViewController)
-    //func myModalDidFinish(controller:ComposeViewController)
+    func myModalDidFinish(composeViewController:ComposeViewController)
 }
 
 class ComposeViewController: UIViewController, UITextViewDelegate {
@@ -28,6 +28,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     
     var numLeft: Int?
     var user: User?
+    var replyToUserScreenName: String?
 
     
     override func viewDidLoad() {
@@ -46,6 +47,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
                 userImageView.setImageWithURL( url )
             }
         }
+        if (replyToUserScreenName != nil){
+            tweetTextView.text = "@\(replyToUserScreenName!) "
+            tweetTextView.textColor = UIColor.blackColor()
+        }
   
         // Do any additional setup after loading the view.
     }
@@ -59,13 +64,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         
         print("in onTweetButtonPressed")
         TwitterClient.sharedInstance.postTweet(tweetTextView.text)
-        
         self.delegate?.createdTweet(self)
         
         // close the viewcontroller after finish tweeting
-        //self.delegate?.myModalDidFinish(self)
+        self.delegate?.myModalDidFinish(self)
         //self.dismissViewControllerAnimated(true, completion: nil)
-        
         
 
     }
@@ -93,8 +96,10 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
-        tweetTextView.text = nil
-        tweetTextView.textColor = UIColor.blackColor()
+        if(replyToUserScreenName == nil){
+            tweetTextView.text = nil
+            tweetTextView.textColor = UIColor.blackColor()
+        }
     }
 
 }

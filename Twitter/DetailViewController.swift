@@ -61,7 +61,13 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "replySegue" {
+            let compose = segue.destinationViewController  as! ComposeViewController
+            compose.replyToUserScreenName = user.screenName
+        }
+    }
     /*
     // MARK: - Navigation
 
