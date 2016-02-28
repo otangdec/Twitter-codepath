@@ -80,6 +80,11 @@ class UserProfileViewController: UIViewController {
         self.userProfileImageView.clipsToBounds = true
     }
     
+    @IBAction func doneCompose(sender: AnyObject) {
+        
+        // to dismiss view that's presented using modal
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 
     /*
     // MARK: - Navigation
