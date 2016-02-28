@@ -28,10 +28,10 @@ class TweetCell: UITableViewCell{
     @IBOutlet weak var timeTweetedLabel: UILabel!
 
     
+    
     var isFavButtonOn: Bool = false
     var isRetweetButtonOn: Bool = false
     var delegate: TweetCellDelegate?
-    
     
     
     @IBOutlet weak var favCountLabel: UILabel!
@@ -40,7 +40,6 @@ class TweetCell: UITableViewCell{
         didSet {
             tweetTextLabel.text = tweet.text!
             timeTweetedLabel.text = tweet.timeInterval!
-            
 
         }
     }
@@ -70,7 +69,8 @@ class TweetCell: UITableViewCell{
         }
     }
     
-    func getUser(tweetsViewController: TweetsViewController)-> String {
+    func getUser(tweetsViewController: TweetsViewController) -> String {
+//      print("User Screen Name from cell: \(user.screenName)")
         return user.screenName!
     }
     
@@ -78,6 +78,7 @@ class TweetCell: UITableViewCell{
     @IBAction func onReplyPress(sender: AnyObject) {
         print("On Reply Press")
         self.delegate?.didReply(self)
+        
     }
     
     
@@ -112,6 +113,8 @@ class TweetCell: UITableViewCell{
         super.awakeFromNib()
         // Initialization code
         self.replyButton.setImage(UIImage(named: "reply-action-pressed_0") as UIImage?, forState: .Selected)
+        
+
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

@@ -9,10 +9,6 @@
 import UIKit
 import MBProgressHUD
 
-//protocol TweetsViewControllerDelegate : class {
-//    func getUser(tweetsViewController: TweetsViewController) -> String
-//}
-
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, TweetCellDelegate{
 
     @IBOutlet weak var composeButton: UIBarButtonItem!
@@ -21,7 +17,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     var tweets: [Tweet]?
     var refreshControl: UIRefreshControl!
-    //var delegate: TweetsViewControllerDelegate?
     var userScreenName: String?
     
     
@@ -97,9 +92,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func didReply(tweetCell: TweetCell) {
         
         print("Did Reply")
-//        userScreenName = self.delegate?.getUser(self)
-//        print("UserScreenName: \(userScreenName)")
-        userScreenName = "TEST TEST"
+        // get the selected user screen name
+        userScreenName = tweetCell.user.screenName
         performSegueWithIdentifier("replyFromHomeSegue", sender: self)
     }
     
@@ -157,6 +151,13 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.user = tweets![indexPath.row].user
         return cell
     }
+    
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        let indexPath = tableView.indexPathForSelectedRow
+//        let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! TweetCell
+//        print("From Did Select Row: \(currentCell.user.screenName)")
+//        
+//    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
