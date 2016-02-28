@@ -34,7 +34,30 @@ class UserProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        userNameLabel.text = user.name
+
+            userNameLabel.text = user?.name
+            handleLabel.text = "@" + user!.screenName!
+            let url = NSURL( string: user!.profileImageUrl! )
+            let bgUrl = NSURL( string: user!.profileBGImageUrl!)
+            
+            if let url = url {
+                userProfileImageView.setImageWithURL( url )
+            }
+            if let bgUrl = bgUrl {
+                userHeaderImageView.setImageWithURL(bgUrl)
+            }
+            
+            customizeProfileImage()
+            
+            locationLabel.text = user!.location
+            
+            descriptionLabel.text = user!.userDescription
+        
+            
+            numFollowersLabel.text = String(user!.followersCount!)
+            
+            numFollowingLabel.text = String(user!.followingCount!)
+
 
         // Do any additional setup after loading the view.
     }
@@ -42,6 +65,19 @@ class UserProfileViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setBorder(button: UIButton, borderWidth: CGFloat, cornerRadius: CGFloat, borderColor: UIColor){
+        button.layer.borderWidth = borderWidth
+        button.layer.cornerRadius = cornerRadius
+        button.layer.borderColor = borderColor.CGColor
+        
+    }
+    func customizeProfileImage(){
+        self.userProfileImageView.layer.cornerRadius = 8
+        self.userProfileImageView.layer.borderWidth = 3
+        self.userProfileImageView.layer.borderColor = UIColor.whiteColor().CGColor
+        self.userProfileImageView.clipsToBounds = true
     }
     
 

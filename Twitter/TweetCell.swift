@@ -11,6 +11,7 @@ import UIKit
 
 protocol TweetCellDelegate : class {
     func didReply(tweetCell : TweetCell)
+    func didTapProfileImage(tweetcell: TweetCell)
 }
 
 class TweetCell: UITableViewCell{
@@ -61,6 +62,8 @@ class TweetCell: UITableViewCell{
             self.userImageView.layer.borderColor = UIColor.whiteColor().CGColor
             self.userImageView.clipsToBounds = true
 
+            let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
+            userImageView.addGestureRecognizer(tapGestureRecognizer)
 
             //favCountLabel.text = "\(user.favCount)"
             favCountLabel.text = "\(user.favCount)"
@@ -68,18 +71,28 @@ class TweetCell: UITableViewCell{
 
         }
     }
-    
-    func getUser(tweetsViewController: TweetsViewController) -> String {
-//      print("User Screen Name from cell: \(user.screenName)")
-        return user.screenName!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        self.replyButton.setImage(UIImage(named: "reply-action-pressed_0") as UIImage?, forState: .Selected)
     }
     
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        // Configure the view for the selected state
+    }
     
     @IBAction func onReplyPress(sender: AnyObject) {
         print("On Reply Press")
         self.delegate?.didReply(self)
-        
     }
+    
+    
+    func imageTapped(sender: UITapGestureRecognizer){
+        self.delegate?.didTapProfileImage(self)
+    }
+    
     
     
     @IBAction func onRetweetPress(sender: AnyObject) {
@@ -109,16 +122,5 @@ class TweetCell: UITableViewCell{
     }
 
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        self.replyButton.setImage(UIImage(named: "reply-action-pressed_0") as UIImage?, forState: .Selected)
-        
 
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
 }

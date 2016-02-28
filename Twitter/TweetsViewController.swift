@@ -11,6 +11,8 @@ import MBProgressHUD
 
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, TweetCellDelegate{
 
+
+
     @IBOutlet weak var composeButton: UIBarButtonItem!
 
     @IBOutlet weak var tableView: UITableView!
@@ -18,7 +20,10 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var tweets: [Tweet]?
     var refreshControl: UIRefreshControl!
     var userScreenName: String?
+    var userForUserProfile: User?
+    var tweetForUserProfile: Tweet?
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +102,13 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         performSegueWithIdentifier("replyFromHomeSegue", sender: self)
     }
     
+    
+    func didTapProfileImage(tweetCell: TweetCell) {
+        userForUserProfile = tweetCell.user
+        tweetForUserProfile = tweetCell.tweet
+        performSegueWithIdentifier("userProfileSegue", sender: self)
+    }
+    
    
     func networkRequest(){
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
@@ -151,13 +163,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.user = tweets![indexPath.row].user
         return cell
     }
-    
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let indexPath = tableView.indexPathForSelectedRow
-//        let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! TweetCell
-//        print("From Did Select Row: \(currentCell.user.screenName)")
-//        
-//    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -181,6 +186,10 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             print("User Screen Name: \(userScreenName)")
             composeViewController.replyToUserScreenName = userScreenName
         }
-        
+        if segue.identifier == "userProfileSegue" {
+            let userProfileViewController = segue.destinationViewController as! UserProfileViewController
+            userProfileViewController.user = userForUserProfile
+            userProfileViewController.tweet = tweetForUserProfile
+        }
     }
 }
