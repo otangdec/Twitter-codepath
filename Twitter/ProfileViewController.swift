@@ -33,7 +33,6 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         if User.currentUser != nil{
             user = User.currentUser!
-            
             userNameLabel.text = user?.name
             handleLabel.text = "@" + user!.screenName!
             let url = NSURL( string: user!.profileImageUrl! )
@@ -58,25 +57,20 @@ class ProfileViewController: UIViewController {
             
             numFollowingLabel.text = String(user!.followingCount!)
         }
-
-    
-        
-        
-        // Do any additional setup after loading the view.
     }
+    
     func setBorder(button: UIButton, borderWidth: CGFloat, cornerRadius: CGFloat, borderColor: UIColor){
         button.layer.borderWidth = borderWidth
         button.layer.cornerRadius = cornerRadius
         button.layer.borderColor = borderColor.CGColor
-        
     }
+    
     func customizeProfileImage(){
         self.userProfileImageView.layer.cornerRadius = 8
         self.userProfileImageView.layer.borderWidth = 3
         self.userProfileImageView.layer.borderColor = UIColor.whiteColor().CGColor
         self.userProfileImageView.clipsToBounds = true
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -86,14 +80,4 @@ class ProfileViewController: UIViewController {
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent;
     }
-
-    
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }

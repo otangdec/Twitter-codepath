@@ -21,13 +21,10 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var numFollowingLabel: UILabel!
-    
     @IBOutlet weak var numFollowersLabel: UILabel!
-    
     @IBOutlet weak var composeButton: UIButton!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
-    
     
     var tweet: Tweet!
     var user: User!
@@ -48,18 +45,10 @@ class UserProfileViewController: UIViewController {
             }
             
             customizeProfileImage()
-            
             locationLabel.text = user!.location
-            
             descriptionLabel.text = user!.userDescription
-        
-            
             numFollowersLabel.text = String(user!.followersCount!)
-            
             numFollowingLabel.text = String(user!.followingCount!)
-
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,8 +60,8 @@ class UserProfileViewController: UIViewController {
         button.layer.borderWidth = borderWidth
         button.layer.cornerRadius = cornerRadius
         button.layer.borderColor = borderColor.CGColor
-        
     }
+    
     func customizeProfileImage(){
         self.userProfileImageView.layer.cornerRadius = 8
         self.userProfileImageView.layer.borderWidth = 3
@@ -81,19 +70,7 @@ class UserProfileViewController: UIViewController {
     }
     
     @IBAction func doneCompose(sender: AnyObject) {
-        
         // to dismiss view that's presented using modal
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

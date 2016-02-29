@@ -18,7 +18,6 @@ class Tweet: NSObject {
     var retweetCount: Int!
     var timeInterval: String!
 
-    
     init(dictionary: NSDictionary){
         
         super.init()

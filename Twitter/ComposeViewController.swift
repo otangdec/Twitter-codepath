@@ -14,22 +14,17 @@ protocol ComposeViewControllerDelegate {
 }
 
 class ComposeViewController: UIViewController, UITextViewDelegate {
-
     @IBOutlet weak var tweetTextView: UITextView!
     @IBOutlet weak var numCharLeft: UILabel!
     @IBOutlet weak var tweetButton: UIButton!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var handleLabel: UILabel!
-    
     @IBOutlet weak var userImageView: UIImageView!
 
-    
     var delegate: ComposeViewControllerDelegate?
-    
     var numLeft: Int?
     var user: User?
     var replyToUserScreenName: String?
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,12 +42,11 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
                 userImageView.setImageWithURL( url )
             }
         }
+        
         if (replyToUserScreenName != nil){
             tweetTextView.text = "@\(replyToUserScreenName!) "
             tweetTextView.textColor = UIColor.blackColor()
         }
-  
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,26 +55,18 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func onTweetButtonPressed(sender: AnyObject) {
-        
-        print("in onTweetButtonPressed")
         TwitterClient.sharedInstance.postTweet(tweetTextView.text)
         self.delegate?.createdTweet(self)
         
         // close the viewcontroller after finish tweeting
         self.delegate?.myModalDidFinish(self)
-        //self.dismissViewControllerAnimated(true, completion: nil)
-        
-
     }
 
     @IBAction func doneCompose(sender: AnyObject) {
-        
         // to dismiss view that's presented using modal
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-
-    
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
         numLeft =  140 - tweetTextView.text!.utf16.count
@@ -91,7 +77,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         if numLeft == 0{
             tweetTextView.deleteBackward()
         }
-
         return true
     }
     
@@ -101,5 +86,4 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
             tweetTextView.textColor = UIColor.blackColor()
         }
     }
-
 }

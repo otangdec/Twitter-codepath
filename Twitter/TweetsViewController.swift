@@ -11,10 +11,7 @@ import MBProgressHUD
 
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, TweetCellDelegate{
 
-
-
     @IBOutlet weak var composeButton: UIBarButtonItem!
-
     @IBOutlet weak var tableView: UITableView!
 
     var tweets: [Tweet]?
@@ -22,9 +19,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var userScreenName: String?
     var userForUserProfile: User?
     var tweetForUserProfile: Tweet?
-    
-
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,34 +31,14 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         initializeRefreshControl()
         networkRequest()
         initializeNavigationBar()
-
     }
-    
     
     func initializeNavigationBar(){
         self.navigationItem.title = "Tweet"
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: nil, action: nil)
-        
     }
 
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
-//
-//        delay(5, closure: {
-//            self.refresh(self)
-//        })
-//        self.tableView.reloadData()
-        
-        
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-        
-    }
-    
     func delay(delay: Double, closure: () -> () ) {
         dispatch_after(
             dispatch_time(
@@ -81,7 +56,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func createdTweet(composeViewController: ComposeViewController) {
-//        self.getTimelineTweets()
         print("In CreatedTweet")
         self.refreshControl.beginRefreshing()
         let completion = {(tweets: [Tweet]?, error: NSError?) -> () in
@@ -89,13 +63,10 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
         }
-        
         TwitterClient.sharedInstance.homeTimeline(completion)
- 
     }
     
     func didReply(tweetCell: TweetCell) {
-        
         print("Did Reply")
         // get the selected user screen name
         userScreenName = tweetCell.user.screenName
@@ -127,11 +98,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.addSubview(refreshControl)
     }
     
-//    func refresh(sender:AnyObject){
-//        networkRequest()
-//        self.refreshControl.endRefreshing()
-//    }
-
     func onRefresh(){
         networkRequest()
         self.refreshControl.endRefreshing()
@@ -153,7 +119,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             return 0
         }
-
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -165,7 +130,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         if segue.identifier == "detailSegue" {
             let cell = sender as! UITableViewCell
             let indexPath = tableView.indexPathForCell(cell)
@@ -181,11 +145,13 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             composeViewController.delegate = self
             
         }
+        
         if segue.identifier == "replyFromHomeSegue" {
             let composeViewController = segue.destinationViewController as! ComposeViewController
             print("User Screen Name: \(userScreenName)")
             composeViewController.replyToUserScreenName = userScreenName
         }
+        
         if segue.identifier == "userProfileSegue" {
             let userProfileViewController = segue.destinationViewController as! UserProfileViewController
             userProfileViewController.user = userForUserProfile

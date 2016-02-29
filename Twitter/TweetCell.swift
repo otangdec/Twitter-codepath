@@ -16,8 +16,6 @@ protocol TweetCellDelegate : class {
 
 class TweetCell: UITableViewCell{
     
-    //@IBOutlet weak var tagLineLabel: UILabel!
-
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
@@ -27,13 +25,10 @@ class TweetCell: UITableViewCell{
     @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var timeTweetedLabel: UILabel!
-
-    
     
     var isFavButtonOn: Bool = false
     var isRetweetButtonOn: Bool = false
     var delegate: TweetCellDelegate?
-    
     
     @IBOutlet weak var favCountLabel: UILabel!
     
@@ -41,7 +36,6 @@ class TweetCell: UITableViewCell{
         didSet {
             tweetTextLabel.text = tweet.text!
             timeTweetedLabel.text = tweet.timeInterval!
-
         }
     }
     
@@ -50,7 +44,7 @@ class TweetCell: UITableViewCell{
         didSet {
             userNameLabel.text = user.name
             screenNameLabel.text = "@\(user.screenName!)"
-            //tagLineLabel.text = user.tagline
+
             let url = NSURL( string: user.profileImageUrl! )
 
             if let url = url {
@@ -65,10 +59,8 @@ class TweetCell: UITableViewCell{
             let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped:"))
             userImageView.addGestureRecognizer(tapGestureRecognizer)
 
-            //favCountLabel.text = "\(user.favCount)"
             favCountLabel.text = "\(user.favCount)"
             retweetCountLabel.text = "\(tweet.retweetCount)"
-
         }
     }
 
@@ -88,12 +80,9 @@ class TweetCell: UITableViewCell{
         self.delegate?.didReply(self)
     }
     
-    
     func imageTapped(sender: UITapGestureRecognizer){
         self.delegate?.didTapProfileImage(self)
     }
-    
-    
     
     @IBAction func onRetweetPress(sender: AnyObject) {
         if isRetweetButtonOn {
@@ -120,7 +109,4 @@ class TweetCell: UITableViewCell{
         }
         favCountLabel.text = "\(user.favCount)"
     }
-
-
-
 }

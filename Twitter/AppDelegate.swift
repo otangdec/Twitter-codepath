@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        
         // Override point for customization after application launch.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
         
@@ -26,8 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             window?.rootViewController = vc
         }
-    
-        
         initializeTabBar()
         return true
     }
@@ -87,8 +84,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         profileViewController.tabBarItem.title = "Me"
         profileViewController.tabBarItem.image = UIImage(named: "profile")
 
-
-        
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [tweetsViewController, notificationViewController, messageViewController, profileViewController]
         tabBarController.tabBar.tintColor = UIColor(red: 70/255, green: 181/255, blue: 251/255, alpha: 1)

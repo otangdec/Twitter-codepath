@@ -70,9 +70,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     func loginWithCompletion(completion: (user: User?, error: NSError?) -> ()) {
         loginCompletion = completion
         
-        
         //Fetch request token & refirect to authorization page
-        
         TwitterClient.sharedInstance.requestSerializer.removeAccessToken()
         TwitterClient.sharedInstance.fetchRequestTokenWithPath( "oauth/request_token",
             method: "GET",
@@ -83,7 +81,6 @@ class TwitterClient: BDBOAuth1SessionManager {
                 let authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
                 
                 UIApplication.sharedApplication().openURL(authURL!)
-                
             },
             failure: { (error: NSError!) -> Void in
                 print("Failed to get request token")
@@ -129,5 +126,4 @@ class TwitterClient: BDBOAuth1SessionManager {
             }
         )
     }
-
 }

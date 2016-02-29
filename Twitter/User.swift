@@ -25,7 +25,6 @@ class User: NSObject {
     var userDescription: String?
     var followersCount: Int?
     var followingCount: Int?
-    
 
     init(dictionary: NSDictionary){
         

@@ -10,23 +10,16 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
-    
     var tweet: Tweet!
     var user: User!
 
     @IBOutlet weak var userProfileImageView: UIImageView!
-    
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var handleLabel: UILabel!
-    
     @IBOutlet weak var tweetMessageLabel: UILabel!
-    
     @IBOutlet weak var dateLabel: UILabel!
-    
     @IBOutlet weak var retweetNumberLabel: UILabel!
-    
     @IBOutlet weak var favouriteNumberLabel: UILabel!
-    
     @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favouriteButton: UIButton!
@@ -51,9 +44,6 @@ class DetailViewController: UIViewController {
         
         retweetNumberLabel.text = "\(tweet.retweetCount)"
         favouriteNumberLabel.text = "\(user.favCount)"
-
-        
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,14 +58,4 @@ class DetailViewController: UIViewController {
             compose.replyToUserScreenName = user.screenName
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
