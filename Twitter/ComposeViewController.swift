@@ -59,7 +59,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         self.delegate?.createdTweet(self)
         
         // close the viewcontroller after finish tweeting
-        self.delegate?.myModalDidFinish(self)
+//        self.delegate?.myModalDidFinish(self)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     @IBAction func doneCompose(sender: AnyObject) {

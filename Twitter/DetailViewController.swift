@@ -24,6 +24,9 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favouriteButton: UIButton!
     
+    var isFavButtonOn: Bool = false
+    var isRetweetButtonOn: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         userNameLabel.text = user.name
@@ -46,6 +49,32 @@ class DetailViewController: UIViewController {
         favouriteNumberLabel.text = "\(user.favCount)"
     }
 
+    @IBAction func onRetweetPress(sender: AnyObject) {
+        if isRetweetButtonOn {
+            retweetButton.setImage(UIImage(named: "retweet-action"), forState: UIControlState.Normal)
+            tweet.retweetCount!--
+            isRetweetButtonOn = false
+        } else {
+            retweetButton.setImage(UIImage(named: "retweet-action-on"), forState: UIControlState.Normal)
+            tweet.retweetCount!++
+            isRetweetButtonOn = true
+        }
+        retweetNumberLabel.text = "\(tweet.retweetCount)"
+    }
+    
+    @IBAction func onFavouritePress(sender: AnyObject) {
+        if isFavButtonOn {
+            favouriteButton.setImage(UIImage(named:"like-action"), forState: UIControlState.Normal)
+            isFavButtonOn = false
+            user.favCount--
+        } else {
+            favouriteButton.setImage(UIImage(named:"like-action-on"), forState: UIControlState.Normal)
+            isFavButtonOn = true
+            user.favCount++
+        }
+        favouriteNumberLabel.text = "\(user.favCount)"
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

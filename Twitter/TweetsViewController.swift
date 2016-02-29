@@ -73,14 +73,12 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         performSegueWithIdentifier("replyFromHomeSegue", sender: self)
     }
     
-    
     func didTapProfileImage(tweetCell: TweetCell) {
         userForUserProfile = tweetCell.user
         tweetForUserProfile = tweetCell.tweet
         performSegueWithIdentifier("userProfileSegue", sender: self)
     }
     
-   
     func networkRequest(){
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         TwitterClient.sharedInstance.hometTimelineWithParams(nil,
@@ -103,7 +101,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.refreshControl.endRefreshing()
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
