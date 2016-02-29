@@ -34,7 +34,6 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ![ALT TEXT] (twitter-1.gif)
 
@@ -108,8 +107,12 @@ Here's a walkthrough of implemented user stories:
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
+The main challenge in this home work is Twitter's rate limit. Since we have a limited number of request we can make, it did slows down the development.
 
-Describe any challenges encountered while building the app.
+Time constrain is also another the main factor for me since I'm a full time student and I had two homework due and one exam coming up. 
+
+The concept of Protocol and Delegate is not very easy to understand either. I probably need more time to let the concept sink in. Passing the data between view controllers or between custom cell and view controller is also challenging.
+
 
 ## License
 
